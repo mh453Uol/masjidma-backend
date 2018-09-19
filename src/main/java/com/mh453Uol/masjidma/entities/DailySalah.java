@@ -1,14 +1,11 @@
 package com.mh453Uol.masjidma.entities;
 
 import java.sql.Time;
+import java.time.Month;
 
 import javax.persistence.Embedded;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 @Entity
@@ -29,12 +26,12 @@ public class DailySalah {
 		this.salah = new Salah();
 	}
 	
-	public DailySalah(byte day, byte month, Organisation organisation) {
+	public DailySalah(int day, Month month, Organisation organisation) {
 		this();
 		this.salahId = new SalahId(day, month, organisation);
 	}
 	
-	public DailySalah(byte day, byte month, Organisation organisation, 
+	public DailySalah(int day, Month month, Organisation organisation, 
 			Time sunrise, Time fajr, Time zuhr, Time asr, Time magrib, Time isha) {
 		this(day, month, organisation);
 		

@@ -1,6 +1,7 @@
 package com.mh453Uol.masjidma.configurations;
 
 import java.sql.Time;
+import java.time.Month;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -22,7 +23,7 @@ public class SeedDatabase {
 			OrganisationRespository organisationRepository, 
 			DailySalahRespository dailySalahRespository) {
 		return args -> {		
-			/*
+			
 			User me = new User("Majid","Hussain");
 			me.getAudit().create(me);
 			userRepository.save(me);
@@ -34,7 +35,7 @@ public class SeedDatabase {
 			organisationRepository.save(prayerRoomAtUol);
 			
 			
-			DailySalah saturday = new DailySalah((byte)8, (byte)9 , prayerRoomAtUol);
+			DailySalah saturday = new DailySalah(8, Month.SEPTEMBER,prayerRoomAtUol);
 			saturday.getSalah().setFajr(new Time(5,0,0));
 			saturday.getSalah().setSunrise(new Time(6,0,0));
 			saturday.getSalah().setZuhr(new Time(13,30,0));
@@ -45,7 +46,6 @@ public class SeedDatabase {
 			saturday.getAudit().create(me);
 			
 			dailySalahRespository.save(saturday);
-			*/
 		};
 	}
 }

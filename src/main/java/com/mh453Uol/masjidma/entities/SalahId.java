@@ -1,6 +1,7 @@
 package com.mh453Uol.masjidma.entities;
 
 import java.io.Serializable;
+import java.time.Month;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -8,8 +9,6 @@ import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MapsId;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Embeddable
@@ -19,11 +18,11 @@ public class SalahId implements Serializable {
 
 	@Column(name = "day")
 	@Size(min=1,max=31)
-    private byte day;
+    private int day;
  
     @Column(name = "month")
 	@Size(min=1,max=12)
-    private byte month;
+    private Month month;
     
     @ManyToOne(fetch = FetchType.LAZY) //organisation can have many salah events and salah is for one organisation
     @JoinColumn(name="organisation_id")
@@ -31,22 +30,22 @@ public class SalahId implements Serializable {
     
     public SalahId() {}
     
-    public SalahId(byte day, byte month, Organisation organisation) {
+    public SalahId(int day, Month month, Organisation organisation) {
     	this.day = day;
     	this.month = month;
     	this.organisation = organisation;
     }
   
-	public byte getDay() {
+	public int getDay() {
 		return day;
 	}
 	public void setDay(byte day) {
 		this.day = day;
 	}
-	public byte getMonth() {
+	public Month getMonth() {
 		return month;
 	}
-	public void setMonth(byte month) {
+	public void setMonth(Month month) {
 		this.month = month;
 	}
 	public Organisation getOrganisation() {

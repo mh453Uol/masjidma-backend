@@ -1,12 +1,6 @@
 package com.mh453Uol.masjidma.restapi;
 
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mh453Uol.masjidma.dtos.DailySalahDto;
+import com.mh453Uol.masjidma.dtos.MonthlySalahDto;
 import com.mh453Uol.masjidma.services.DailySalahService;
 
 @RestController
@@ -27,28 +22,27 @@ public class SalahController {
 	private DailySalahService dailySalahService;
 	
 	@RequestMapping(value="/{day}/{month}/{organisationId}", method = RequestMethod.GET)
-	public DailySalahDto getSalahsByDate(@PathVariable Byte day,@PathVariable Byte month,
+	public DailySalahDto getSalahsByDate(@PathVariable int day,@PathVariable Month month,
 			@PathVariable Long organisationId) {
 		
 		return dailySalahService.findById(day,month,organisationId);
 	}
 	
 	@RequestMapping(value = "/{numbericalMonth}", method = RequestMethod.POST)
-	public ResponseEntity<DailySalahDto> addMonthlySalahs(@PathVariable @NotNull Integer numbericalMonth,
-			@Valid @RequestBody ArrayList<DailySalahDto> salahs){
+	public ResponseEntity<MonthlySalahDto> addMonthlySalahs(@PathVariable int numbericalMonth,
+			@RequestBody MonthlySalahDto dto){
 		
-		if(salahs == null) {
+		if(dto == null) {
 			return null;
 		}
 		
-		Month month = Month.of(numbericalMonth);
 		
-		if(salahs.size() > month.maxLength()) {
-			return null;
+		if(dto.getSalahs().size() < dto.getMonth().minLength()) {
+			//return null;
 		}
 		
-		this.dailySalahService.saveMontlySalahs(salahs);
+		//this.dailySalahService.saveMontlySalahs(salahs);
 		
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<MonthlySalahDto>(dto,HttpStatus.CREATED);
 	}
 }
