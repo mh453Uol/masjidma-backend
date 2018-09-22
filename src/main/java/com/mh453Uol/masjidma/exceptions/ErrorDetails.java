@@ -8,9 +8,12 @@ public class ErrorDetails {
 	private String details;
 	private int status;
 	
-	public ErrorDetails(Date time, String message,
+	public ErrorDetails() {
+		this.timestamp = new Date();
+	}
+	public ErrorDetails(String message,
 			String details, int status) {
-		this.timestamp = time;
+		this();
 		this.message = message;
 		this.details = details;
 		this.status = status;

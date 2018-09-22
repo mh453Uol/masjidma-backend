@@ -11,30 +11,30 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "dailysalah")
 public class DailySalah {
-	
+
 	@EmbeddedId
 	private SalahId salahId;
-	
+
 	@Embedded
 	private Salah salah;
-	
+
 	@Embedded
 	private Audit audit;
-	
+
 	public DailySalah() {
 		this.audit = new Audit();
 		this.salah = new Salah();
 	}
-	
-	public DailySalah(int day, Month month, Organisation organisation) {
+
+	public DailySalah(int day, int month, Organisation organisation) {
 		this();
 		this.salahId = new SalahId(day, month, organisation);
 	}
-	
-	public DailySalah(int day, Month month, Organisation organisation, 
-			Time sunrise, Time fajr, Time zuhr, Time asr, Time magrib, Time isha) {
+
+	public DailySalah(int day, int month, Organisation organisation, Time sunrise, Time fajr, Time zuhr, Time asr,
+			Time magrib, Time isha) {
 		this(day, month, organisation);
-		
+
 		this.salah.setSunrise(sunrise);
 		this.salah.setFajr(fajr);
 		this.salah.setZuhr(zuhr);

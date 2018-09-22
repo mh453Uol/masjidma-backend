@@ -3,9 +3,10 @@ package com.mh453Uol.masjidma.dtos;
 import java.time.LocalTime;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class SalahDto {
-	
+
 	@NotNull
 	private LocalTime sunrise;
 	
@@ -23,6 +24,19 @@ public class SalahDto {
 	
 	@NotNull
 	private LocalTime isha;
+	
+	public SalahDto() {}
+	
+	public SalahDto(LocalTime sunrise, LocalTime fajr, LocalTime zuhr,
+			LocalTime asr, LocalTime magrib, LocalTime isha) {
+		super();
+		this.sunrise = sunrise;
+		this.fajr = fajr;
+		this.zuhr = zuhr;
+		this.asr = asr;
+		this.magrib = magrib;
+		this.isha = isha;
+	}
 
 	public LocalTime getSunrise() {
 		return sunrise;

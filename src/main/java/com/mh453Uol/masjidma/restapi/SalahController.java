@@ -1,6 +1,11 @@
 package com.mh453Uol.masjidma.restapi;
 
 import java.time.Month;
+import java.util.ArrayList;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mh453Uol.masjidma.dtos.DailySalahDto;
 import com.mh453Uol.masjidma.dtos.MonthlySalahDto;
+import com.mh453Uol.masjidma.exceptions.ErrorDetails;
 import com.mh453Uol.masjidma.services.DailySalahService;
 
 @RestController
@@ -20,29 +26,27 @@ public class SalahController {
 
 	@Autowired
 	private DailySalahService dailySalahService;
-	
-	@RequestMapping(value="/{day}/{month}/{organisationId}", method = RequestMethod.GET)
-	public DailySalahDto getSalahsByDate(@PathVariable int day,@PathVariable Month month,
-			@PathVariable Long organisationId) {
+
+	@RequestMapping(value = "/{day}/{month}/{organisationId}", method = RequestMethod.GET)
+	public DailySalahDto getSalahsByDate(@PathVariable int day, @PathVariable int month,
+			@PathVariable long organisationId) {
+		return dailySalahService.findById(day, Month.of(month), organisationId);
+	}
+
+	@RequestMapping(value = "/monthly", method = RequestMethod.POST)
+	public ResponseEntity<MonthlySalahDto> addMonthlySalahs(@RequestBody @Valid MonthlySalahDto dto) {
 		
-		return dailySalahService.findById(day,month,organisationId);
+		this.dailySalahService.saveMontlySalahs(dto);
+
+		return new ResponseEntity<MonthlySalahDto>(dto,HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = "/{numbericalMonth}", method = RequestMethod.POST)
-	public ResponseEntity<MonthlySalahDto> addMonthlySalahs(@PathVariable int numbericalMonth,
-			@RequestBody MonthlySalahDto dto){
+	@RequestMapping(value = "/monthly/{month}/{organisationId}", method = RequestMethod.GET)
+	public ResponseEntity<MonthlySalahDto> getMonthlySalahs(@PathVariable int month,
+			@PathVariable long organisationId){
 		
-		if(dto == null) {
-			return null;
-		}
+		MonthlySalahDto salahs = this.dailySalahService.getMonthlySalahs(Month.of(month), organisationId);
 		
-		
-		if(dto.getSalahs().size() < dto.getMonth().minLength()) {
-			//return null;
-		}
-		
-		//this.dailySalahService.saveMontlySalahs(salahs);
-		
-		return new ResponseEntity<MonthlySalahDto>(dto,HttpStatus.CREATED);
+		return new ResponseEntity<MonthlySalahDto>(salahs,HttpStatus.OK);
 	}
 }

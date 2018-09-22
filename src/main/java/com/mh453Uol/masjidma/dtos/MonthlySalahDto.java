@@ -1,33 +1,58 @@
 package com.mh453Uol.masjidma.dtos;
 
-import java.time.Month;
+import java.time.*;
 import java.util.ArrayList;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Length;
+
 public class MonthlySalahDto {
-	
+
 	@NotNull
 	private Month month;
 	
-	@NotBlank
-	private ArrayList<SalahDto> salahs;
-	
-	private MonthlySalahDto() {
-		this.salahs = new ArrayList<SalahDto>();
+	@NotNull
+	private Long organisationId;
+
+	@NotEmpty
+	@Valid
+	private ArrayList<DailySalahDto> salahs;
+
+	public MonthlySalahDto() {
+		this.salahs = new ArrayList<DailySalahDto>();
 	}
 	
-	public Month getMonth() {
-		return month;
-	}
-	public void setMonth(Month month) {
+	public MonthlySalahDto(Month month, long organisationId) {
+		this();
 		this.month = month;
+		this.organisationId = organisationId;
 	}
-	public ArrayList<SalahDto> getSalahs() {
+
+	public int getMonth() {
+		return month.getValue();
+	}
+
+	public void setMonth(int month) {
+		this.month = Month.of(month);
+	}
+
+	public ArrayList<DailySalahDto> getSalahs() {
 		return salahs;
 	}
-	public void setSalahs(ArrayList<SalahDto> salahs) {
+
+	public void setSalahs(ArrayList<DailySalahDto> salahs) {
 		this.salahs = salahs;
+	}
+
+	public Long getOrganisationId() {
+		return organisationId;
+	}
+
+	public void setOrganisationId(Long organisationId) {
+		this.organisationId = organisationId;
 	}
 }
