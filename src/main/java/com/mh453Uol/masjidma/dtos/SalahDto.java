@@ -5,24 +5,32 @@ import java.time.LocalTime;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class SalahDto {
 
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "k:m") //format LocalTime as <1-24>:<0-59>
 	private LocalTime sunrise;
 	
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "k:m")
 	private LocalTime fajr;
 	
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "k:m")
 	private LocalTime zuhr;
 	
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "k:m")
 	private LocalTime asr;
 	
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "k:m")
 	private LocalTime magrib;
 	
 	@NotNull
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "k:m")
 	private LocalTime isha;
 	
 	public SalahDto() {}
