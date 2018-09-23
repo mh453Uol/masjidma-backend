@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mh453Uol.masjidma.dtos.DailySalahDto;
+import com.mh453Uol.masjidma.dtos.MasjidPrayerTimeDto;
 import com.mh453Uol.masjidma.dtos.MonthlySalahDto;
 import com.mh453Uol.masjidma.exceptions.ErrorDetails;
 import com.mh453Uol.masjidma.services.DailySalahService;
@@ -28,7 +28,7 @@ public class SalahController {
 	private DailySalahService dailySalahService;
 
 	@RequestMapping(value = "/{day}/{month}/{organisationId}", method = RequestMethod.GET)
-	public DailySalahDto getSalahsByDate(@PathVariable int day, @PathVariable int month,
+	public MasjidPrayerTimeDto getSalahsByDate(@PathVariable int day, @PathVariable int month,
 			@PathVariable long organisationId) {
 		return dailySalahService.findById(day, Month.of(month), organisationId);
 	}

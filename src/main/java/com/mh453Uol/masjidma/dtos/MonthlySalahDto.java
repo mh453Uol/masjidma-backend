@@ -20,10 +20,10 @@ public class MonthlySalahDto {
 
 	@NotEmpty
 	@Valid
-	private ArrayList<DailySalahDto> salahs;
+	private ArrayList<MasjidPrayerTimeDto> salahs;
 
 	public MonthlySalahDto() {
-		this.salahs = new ArrayList<DailySalahDto>();
+		this.salahs = new ArrayList<MasjidPrayerTimeDto>();
 	}
 	
 	public MonthlySalahDto(Month month, long organisationId) {
@@ -40,11 +40,11 @@ public class MonthlySalahDto {
 		this.month = Month.of(month);
 	}
 
-	public ArrayList<DailySalahDto> getSalahs() {
+	public ArrayList<MasjidPrayerTimeDto> getSalahs() {
 		return salahs;
 	}
 
-	public void setSalahs(ArrayList<DailySalahDto> salahs) {
+	public void setSalahs(ArrayList<MasjidPrayerTimeDto> salahs) {
 		this.salahs = salahs;
 	}
 

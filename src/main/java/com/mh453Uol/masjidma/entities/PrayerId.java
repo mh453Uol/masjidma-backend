@@ -16,7 +16,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 
 @Embeddable
-public class SalahId implements Serializable {
+public class PrayerId implements Serializable {
 
 	private static final long serialVersionUID = -8344220517298509794L;
 
@@ -34,10 +34,10 @@ public class SalahId implements Serializable {
 	@JoinColumn(name = "organisation_id")
 	private Organisation organisation;
 
-	public SalahId() {
+	public PrayerId() {
 	}
 
-	public SalahId(int day, int month, Organisation organisation) {
+	public PrayerId(int day, int month, Organisation organisation) {
 		this.day = day;
 		this.month = month;
 		this.organisation = organisation;
@@ -71,9 +71,9 @@ public class SalahId implements Serializable {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
-		if (!(o instanceof SalahId))
+		if (!(o instanceof PrayerId))
 			return false;
-		SalahId that = (SalahId) o;
+		PrayerId that = (PrayerId) o;
 		return Objects.equals(getDay(), that.getDay()) && Objects.equals(getMonth(), that.getMonth())
 				&& Objects.equals(getOrganisation(), that.getOrganisation());
 	}
