@@ -30,13 +30,53 @@ public class PrayerStartTimeDto {
 	
 	public PrayerStartTimeDto() {}
 	
-	public PrayerStartTimeDto(@NotNull LocalTime sunrise, @NotNull LocalTime fajr, @NotNull LocalTime zuhr,
-			@NotNull LocalTime asr, @NotNull LocalTime isha) {
+	public PrayerStartTimeDto(LocalTime sunrise, LocalTime fajr, LocalTime zuhr,
+			LocalTime asr,  LocalTime isha) {
 		super();
 		this.sunrise = sunrise;
 		this.fajr = fajr;
 		this.zuhr = zuhr;
 		this.asr = asr;
+		this.isha = isha;
+	}
+
+	public LocalTime getSunrise() {
+		return sunrise;
+	}
+
+	public void setSunrise(LocalTime sunrise) {
+		this.sunrise = sunrise;
+	}
+
+	public LocalTime getFajr() {
+		return fajr;
+	}
+
+	public void setFajr(LocalTime fajr) {
+		this.fajr = fajr;
+	}
+
+	public LocalTime getZuhr() {
+		return zuhr;
+	}
+
+	public void setZuhr(LocalTime zuhr) {
+		this.zuhr = zuhr;
+	}
+
+	public LocalTime getAsr() {
+		return asr;
+	}
+
+	public void setAsr(LocalTime asr) {
+		this.asr = asr;
+	}
+
+	public LocalTime getIsha() {
+		return isha;
+	}
+
+	public void setIsha(LocalTime isha) {
 		this.isha = isha;
 	}
 }

@@ -1,7 +1,5 @@
 package com.mh453Uol.masjidma.exceptions;
 
-import java.util.Date;
-
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

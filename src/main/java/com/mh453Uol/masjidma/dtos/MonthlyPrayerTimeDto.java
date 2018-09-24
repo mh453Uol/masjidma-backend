@@ -4,13 +4,10 @@ import java.time.*;
 import java.util.ArrayList;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.Length;
-
-public class MonthlySalahDto {
+public class MonthlyPrayerTimeDto {
 
 	@NotNull
 	private Month month;
@@ -20,13 +17,13 @@ public class MonthlySalahDto {
 
 	@NotEmpty
 	@Valid
-	private ArrayList<MasjidPrayerTimeDto> salahs;
+	private ArrayList<MasjidPrayerTimeDto> prayerTimes;
 
-	public MonthlySalahDto() {
-		this.salahs = new ArrayList<MasjidPrayerTimeDto>();
+	public MonthlyPrayerTimeDto() {
+		this.prayerTimes = new ArrayList<MasjidPrayerTimeDto>();
 	}
 	
-	public MonthlySalahDto(Month month, long organisationId) {
+	public MonthlyPrayerTimeDto(Month month, long organisationId) {
 		this();
 		this.month = month;
 		this.organisationId = organisationId;
@@ -40,12 +37,12 @@ public class MonthlySalahDto {
 		this.month = Month.of(month);
 	}
 
-	public ArrayList<MasjidPrayerTimeDto> getSalahs() {
-		return salahs;
+	public ArrayList<MasjidPrayerTimeDto> getPrayerTimes() {
+		return prayerTimes;
 	}
 
-	public void setSalahs(ArrayList<MasjidPrayerTimeDto> salahs) {
-		this.salahs = salahs;
+	public void setPrayerTimes(ArrayList<MasjidPrayerTimeDto> salahs) {
+		this.prayerTimes = salahs;
 	}
 
 	public Long getOrganisationId() {

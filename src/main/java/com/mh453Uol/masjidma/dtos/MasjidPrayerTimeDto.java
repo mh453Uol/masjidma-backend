@@ -22,23 +22,23 @@ public class MasjidPrayerTimeDto {
 
 	@NotNull
 	@Valid
-	private JamaatPrayerTimeDto jammatTimes;
+	private JamaatPrayerTimeDto jamaatTimes;
 
 	@NotNull
 	@Valid
 	private PrayerStartTimeDto startPrayerTimes;
 
 	public MasjidPrayerTimeDto() {
-		this.jammatTimes = new JamaatPrayerTimeDto();
+		this.jamaatTimes = new JamaatPrayerTimeDto();
 		this.startPrayerTimes = new PrayerStartTimeDto();
 	}
 
-	public MasjidPrayerTimeDto(int day, Month month, long organisationId, JamaatPrayerTimeDto jamaat,
-			PrayerStartTimeDto startTimes) {
+	public MasjidPrayerTimeDto(int day, Month month, long organisationId,PrayerStartTimeDto startTimes,
+			JamaatPrayerTimeDto jamaat) {
 		this.day = day;
 		this.month = month;
 		this.organisationId = organisationId;
-		this.jammatTimes = jamaat;
+		this.jamaatTimes = jamaat;
 		this.startPrayerTimes = startTimes;
 	}
 
@@ -70,12 +70,12 @@ public class MasjidPrayerTimeDto {
 		this.organisationId = organisationId;
 	}
 
-	public JamaatPrayerTimeDto getJammatTimes() {
-		return jammatTimes;
+	public JamaatPrayerTimeDto getJamaatTimes() {
+		return jamaatTimes;
 	}
 
-	public void setJammatTimes(JamaatPrayerTimeDto jammatTimes) {
-		this.jammatTimes = jammatTimes;
+	public void setJamaatTimes(JamaatPrayerTimeDto jammatTimes) {
+		this.jamaatTimes = jammatTimes;
 	}
 	public PrayerStartTimeDto getStartPrayerTimes() {
 		return startPrayerTimes;

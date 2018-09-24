@@ -1,7 +1,6 @@
 package com.mh453Uol.masjidma.entities;
 
 import java.io.Serializable;
-import java.time.Month;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,11 +8,8 @@ import javax.persistence.Embeddable;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Size;
 
 @Embeddable
 public class PrayerId implements Serializable {

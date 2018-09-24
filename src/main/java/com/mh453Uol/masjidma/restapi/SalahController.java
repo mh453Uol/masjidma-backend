@@ -1,11 +1,7 @@
 package com.mh453Uol.masjidma.restapi;
 
 import java.time.Month;
-import java.util.ArrayList;
-
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mh453Uol.masjidma.dtos.MasjidPrayerTimeDto;
-import com.mh453Uol.masjidma.dtos.MonthlySalahDto;
-import com.mh453Uol.masjidma.exceptions.ErrorDetails;
+import com.mh453Uol.masjidma.dtos.MonthlyPrayerTimeDto;
 import com.mh453Uol.masjidma.services.DailySalahService;
 
 @RestController
@@ -34,19 +29,19 @@ public class SalahController {
 	}
 
 	@RequestMapping(value = "/monthly", method = RequestMethod.POST)
-	public ResponseEntity<MonthlySalahDto> addMonthlySalahs(@RequestBody @Valid MonthlySalahDto dto) {
+	public ResponseEntity<MonthlyPrayerTimeDto> addMonthlySalahs(@RequestBody @Valid MonthlyPrayerTimeDto dto) {
 		
 		this.dailySalahService.saveMontlySalahs(dto);
 
-		return new ResponseEntity<MonthlySalahDto>(dto,HttpStatus.CREATED);
+		return new ResponseEntity<MonthlyPrayerTimeDto>(dto,HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value = "/monthly/{month}/{organisationId}", method = RequestMethod.GET)
-	public ResponseEntity<MonthlySalahDto> getMonthlySalahs(@PathVariable int month,
+	public ResponseEntity<MonthlyPrayerTimeDto> getMonthlySalahs(@PathVariable int month,
 			@PathVariable long organisationId){
 		
-		MonthlySalahDto salahs = this.dailySalahService.getMonthlySalahs(Month.of(month), organisationId);
+		MonthlyPrayerTimeDto salahs = this.dailySalahService.getMonthlySalahs(Month.of(month), organisationId);
 		
-		return new ResponseEntity<MonthlySalahDto>(salahs,HttpStatus.OK);
+		return new ResponseEntity<MonthlyPrayerTimeDto>(salahs,HttpStatus.OK);
 	}
 }
