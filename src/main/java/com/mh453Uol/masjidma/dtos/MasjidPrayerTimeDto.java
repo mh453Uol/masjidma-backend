@@ -7,6 +7,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.mh453Uol.masjidma.configurations.MonthSerializer;
+
 public class MasjidPrayerTimeDto {
 
 	@NotNull
@@ -15,6 +19,7 @@ public class MasjidPrayerTimeDto {
 	private int day;
 
 	@NotNull
+	@JsonSerialize(using = MonthSerializer.class)
 	private Month month;
 
 	@NotNull
@@ -50,22 +55,18 @@ public class MasjidPrayerTimeDto {
 		this.day = day;
 	}
 
-	public int getMonth() {
-		return month.getValue();
+	public Month getMonth() {
+		return month;
 	}
 
 	public void setMonth(Month month) {
 		this.month = month;
 	}
-
-	public long getOrganisationId() {
-		return organisationId;
+	
+	public Long getOrganisationId() {
+		return this.organisationId;
 	}
-
-	public void setOrganisationId(long organisationId) {
-		this.organisationId = organisationId;
-	}
-
+	
 	public void setOrganisationId(Long organisationId) {
 		this.organisationId = organisationId;
 	}

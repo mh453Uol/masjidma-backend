@@ -68,19 +68,18 @@ public class DailySalahService {
 		return dto;
 	}
 
-	public void saveMontlySalahs(MonthlyPrayerTimeDto dto) {
+	public void saveMontlySalahs(ArrayList<MasjidPrayerTimeDto> dto, int month,Organisation organisation) {
 		ArrayList<MasjidPrayerTime> prayerTimes = new ArrayList<MasjidPrayerTime>();
 		PrayerStartTimeDto startTime = null;
 		JamaatPrayerTimeDto jamaatTime = null;
 		MasjidPrayerTime masjidPrayerTime = null;
 		
-		 for (MasjidPrayerTimeDto prayerTimesDto : dto.getPrayerTimes()) {
+		 for (MasjidPrayerTimeDto prayerTimesDto : dto) {
 			 
 			 startTime = prayerTimesDto.getStartPrayerTimes();
 			 jamaatTime = prayerTimesDto.getJamaatTimes();
 			 
-			 masjidPrayerTime = new MasjidPrayerTime(prayerTimesDto.getDay(), 
-					 dto.getMonth(), new Organisation(dto.getOrganisationId()),
+			 masjidPrayerTime = new MasjidPrayerTime(prayerTimesDto.getDay(), month, organisation,
 					 
 					 new PrayerStartTime(Time.toSqlTime(startTime.getFajr()), Time.toSqlTime(startTime.getSunrise()),
 							 Time.toSqlTime(startTime.getZuhr()),Time.toSqlTime(startTime.getAsr()), 
@@ -99,11 +98,11 @@ public class DailySalahService {
 		dailySalahRepo.saveAll(prayerTimes);
 	}
 
-	public MonthlyPrayerTimeDto getMonthlySalahs(Month month, long organisationId) {
+	public ArrayList<MasjidPrayerTimeDto> getMonthlySalahs(Month month, long organisationId) {
 		Iterable<MasjidPrayerTime> prayerTimes = this.dailySalahRepo
 				.findBySalahIdMonthAndSalahIdOrganisation(month.getValue(), new Organisation(organisationId));
 
-		MonthlyPrayerTimeDto dto = new MonthlyPrayerTimeDto(month, organisationId);
+		ArrayList<MasjidPrayerTimeDto> dto = new ArrayList<MasjidPrayerTimeDto>();
 		JamaatPrayerTime jamaatTime = null;
 		PrayerStartTime startTime = null;
 		
@@ -111,8 +110,7 @@ public class DailySalahService {
 			 jamaatTime = salah.getJammatTimes();
 			 startTime = salah.getSalahStartTimes();
 			 
-			 dto.getPrayerTimes().add(new MasjidPrayerTimeDto(
-					 salah.getSalahId().getDay(),
+			 dto.add(new MasjidPrayerTimeDto(salah.getSalahId().getDay(),
 					 Month.of(salah.getSalahId().getMonth()), 
 					 salah.getSalahId().getOrganisation().getId(), 
 					 
@@ -127,8 +125,7 @@ public class DailySalahService {
 							 jamaatTime.getJamaatAsr().toLocalTime(),
 							 jamaatTime.getJamaatMagrib().toLocalTime(),
 							 jamaatTime.getJamaatIsha().toLocalTime())
-					 ));
-			 
+					 ));			 
 		 }
 
 		return dto;
